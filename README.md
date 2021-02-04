@@ -51,7 +51,7 @@ Copyright 2021 Sébastien Fraysse, http://fraysse.eu, sebastien@fraysse.eu.
 
 ## Installation
 
-### First Commands
+### First Steps
 
 Assuming that you want to install TRAX LRS in a folder named **traxlrs**:
 
@@ -61,7 +61,7 @@ cd traxlrs
 composer install
 ```
 
-### File permissions
+### File Permissions
 
 Folders `storage` and `bootstrap/cache` require write access by the web server.
 If you are not sure how to configure this, you can use the following commands **for testing purpose**.
@@ -104,7 +104,7 @@ DB_USERNAME=postgres
 DB_PASSWORD=aaaaaa
 ```
 
-Finally, enter the following commands:
+### Last Steps
 
 ```
 php artisan key:generate
