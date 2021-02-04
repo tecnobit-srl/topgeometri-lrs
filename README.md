@@ -104,6 +104,24 @@ DB_USERNAME=postgres
 DB_PASSWORD=aaaaaa
 ```
 
+### Environment
+
+In the `.env` file, you can set the current environment, as well as a debugging option.
+
+*For testing and development:*
+
+```ini
+APP_ENV=local
+APP_DEBUG=true
+```
+
+*For production:*
+
+```ini
+APP_ENV=production
+APP_DEBUG=false
+```
+
 ### Last Steps
 
 ```
@@ -112,7 +130,7 @@ php artisan migrate
 ```
 
 
-## Admin account
+## Admin Account
 
 You can now create an admin account with the following command.
 This will give your credentials to log into the application.
