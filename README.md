@@ -25,7 +25,9 @@ Copyright 2021 Sébastien Fraysse, http://fraysse.eu, sebastien@fraysse.eu.
 
 - mod_rewrite
 
-### PHP from 7.2.5 to 7.4
+### PHP 7.2.5 to 7.4
+
+Check that your PHP version and configuration is valid both for PHP Web & CLI.
 
 - BCMath
 - Ctype
