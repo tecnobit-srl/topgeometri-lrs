@@ -49,10 +49,8 @@
                 this.modals.open('confirmClearAll').then(resp => {
                     if (resp.confirmed) {
                         this.deleting = true
-                        let filters = this.$auth.owner ? { owner_id: this.$auth.owner.id } : {}
                         axios.delete(
-                            '/trax/api/front/xapi/ext/all',
-                            { params: { filters }}
+                            '/trax/api/front/xapi/ext/stores',
                         )
                             .then(response => {
                                 this.deleting = false

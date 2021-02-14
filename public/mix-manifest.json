@@ -1,4 +1,8 @@
 {
-    "/js/lrs.js": "/js/lrs.js",
-    "/css/lrs.css": "/css/lrs.css"
+    "/js/lrs.js": "/js/lrs.js?id=83677f2a7e4e7e080c4c",
+    "/css/lrs.css": "/css/lrs.css?id=12ddd8c664853b0768f9",
+    "/js/lrs.js.map": "/js/lrs.js.map?id=48e8e84d79ecf229d570",
+    "/css/lrs.css.map": "/css/lrs.css.map?id=b643b499eebcd0718fb6",
+    "/js/lrs.min.js": "/js/lrs.min.js?id=83677f2a7e4e7e080c4c",
+    "/css/lrs.min.css": "/css/lrs.min.css?id=12ddd8c664853b0768f9"
 }
