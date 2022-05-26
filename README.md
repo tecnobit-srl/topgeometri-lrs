@@ -1,4 +1,4 @@
-# TRAX LRS 2.0.1 - Starter Edition
+# TRAX LRS 2.0.1 - Starter Edition Tecnobit
 
 
 ## About TRAX LRS
