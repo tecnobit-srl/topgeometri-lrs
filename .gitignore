@@ -3,5 +3,6 @@
 /services/tim
 /services/trax/framework
 /vendor
+/.history
 .env
 .env.testing
