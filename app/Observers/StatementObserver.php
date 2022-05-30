@@ -16,7 +16,18 @@ class StatementObserver
      */
     public function created(Statement $statement)
     {
-        Log::info($statement);
+        Log::info('created');
+    }
+
+    /**
+     * Handle the Statement "created" event.
+     *
+     * @param  \App\Models\Statement  $statement
+     * @return void
+     */
+    public function saved(Statement $statement)
+    {
+        Log::info('saved');
     }
 
     /**
