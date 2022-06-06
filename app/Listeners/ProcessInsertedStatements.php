@@ -28,14 +28,13 @@ class ProcessInsertedStatements
     public function handle(StatementRecordsInserted $event)
     {
         foreach ($event->statements as $statement) {
-            $this->processStatement((array) $statement);
+            $this->processStatement($statement);
         }
     }
 
     protected function processStatement($statement)
     {
-        $data = json_decode($statement['data'], true);
-        $verb = $data['verb']['display']['en-US'];
+        $verb = $statement['data']->verb->display->{'en-US'};
         Log::info('Processing statement: ' . $verb);
     }
 }
