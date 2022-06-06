@@ -28,7 +28,7 @@ class ProcessInsertedStatements
     public function handle(StatementRecordsInserted $event)
     {
         foreach ($event->statements as $statement) {
-            $this->processStatement($statement);
+            $this->processStatement(json_decode($statement, true));
         }
     }
 
