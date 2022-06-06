@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
-use Trax\XapiStore\Events\StatementRecordsInserted;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Models\Statement;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Trax\XapiStore\Events\StatementRecordsInserted;
 
 class ProcessInsertedStatements
 {
@@ -35,9 +37,15 @@ class ProcessInsertedStatements
 
     protected function processStatement($statement)
     {
-        $verb = $statement['data']->verb->display->{'en-US'};
+        $data = $statement['data'];
+        $verb = $data->verb->display->{'en-US'};
         if (in_array($verb, $this->toProcess)) {
             Log::info('Processing statement: ' . $verb);
+            $processed = new Statement();
+            $processed->type = $verb;
+            $processed->email = Str::remove('mailto:', $data->actor->mbox);
+            $processed->eg_course_id = $data->context->extensions->{'http://easygenerator/expapi/course/id'};
+            $processed->save();
         }
     }
 }
