@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "spatie/laravel-tail": "^4.4",
-        "trax2/framework": "2.0.1"
+        "trax2/framework": "2.0.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -16,7 +16,7 @@ class StatementObserver
      */
     public function created(Statement $statement)
     {
-        Log::info('created');
+        Log::info('created observer');
     }
 
     /**
@@ -27,7 +27,7 @@ class StatementObserver
      */
     public function saved(Statement $statement)
     {
-        Log::info('saved');
+        Log::info('saved observer');
     }
 
     /**
@@ -38,7 +38,7 @@ class StatementObserver
      */
     public function updated(Statement $statement)
     {
-        //
+        Log::info('updated observer');
     }
 
     /**
