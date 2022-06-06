@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "spatie/laravel-tail": "^4.4",
-        "trax2/framework": "2.0.2"
+        "trax2/framework": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -45,6 +45,12 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/sk4t0/trax2-framework.git"
+        }
+      ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

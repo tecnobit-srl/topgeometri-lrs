@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05fba34fe135300875fd05b07245799a",
+    "content-hash": "76848add9f53b12ad67944dc3d681bfb",
     "packages": [
         {
             "name": "brick/math",
@@ -5437,18 +5437,19 @@
         },
         {
             "name": "trax2/framework",
-            "version": "2.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/trax-project/trax2-framework.git",
-                "reference": "da5af2be04aa73b347cc8af2ceef370e64b3447b"
+                "url": "https://github.com/sk4t0/trax2-framework.git",
+                "reference": "6997250f4baf467135cb295ea99966a716a75c25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trax-project/trax2-framework/zipball/da5af2be04aa73b347cc8af2ceef370e64b3447b",
-                "reference": "da5af2be04aa73b347cc8af2ceef370e64b3447b",
+                "url": "https://api.github.com/repos/sk4t0/trax2-framework/zipball/6997250f4baf467135cb295ea99966a716a75c25",
+                "reference": "6997250f4baf467135cb295ea99966a716a75c25",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -5459,7 +5460,6 @@
                     "Trax\\XapiValidation\\": "xapi-validation/src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
@@ -5475,13 +5475,12 @@
             "keywords": [
                 "lrs",
                 "trax",
-                "xAPI"
+                "xapi"
             ],
             "support": {
-                "issues": "https://github.com/trax-project/trax2-framework/issues",
-                "source": "https://github.com/trax-project/trax2-framework/tree/2.0.2"
+                "source": "https://github.com/sk4t0/trax2-framework/tree/master"
             },
-            "time": "2022-06-01T07:57:35+00:00"
+            "time": "2022-06-06T13:19:06+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -8201,7 +8200,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "trax2/framework": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
