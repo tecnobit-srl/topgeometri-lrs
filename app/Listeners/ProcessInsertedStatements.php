@@ -34,7 +34,8 @@ class ProcessInsertedStatements
 
     protected function processStatement($statement)
     {
-        $verb = $statement['data']['verb']['display']['en-US'];
+        $data = json_decode($statement['data'], true);
+        $verb = $data['verb']['display']['en-US'];
         Log::info('Processing statement: ' . $verb);
     }
 }
