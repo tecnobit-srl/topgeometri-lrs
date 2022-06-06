@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProcessInsertedStatements
 {
+    protected $toProcess = ['passed', 'failed', 'started'];
     /**
      * Create the event listener.
      *
@@ -35,6 +36,8 @@ class ProcessInsertedStatements
     protected function processStatement($statement)
     {
         $verb = $statement['data']->verb->display->{'en-US'};
-        Log::info('Processing statement: ' . $verb);
+        if (in_array($verb, $this->toProcess)) {
+            Log::info('Processing statement: ' . $verb);
+        }
     }
 }
