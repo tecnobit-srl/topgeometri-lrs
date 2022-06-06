@@ -28,7 +28,7 @@ class ProcessInsertedStatements
     public function handle(StatementRecordsInserted $event)
     {
         foreach ($event->statements as $statement) {
-            $this->processStatement($statement->toArray());
+            $this->processStatement($statement);
         }
     }
 
