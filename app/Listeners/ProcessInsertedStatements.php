@@ -27,6 +27,14 @@ class ProcessInsertedStatements
      */
     public function handle(StatementRecordsInserted $event)
     {
-        Log::info($event->statements->toArray()[0]);
+        foreach ($event->statements as $statement) {
+
+        }
+    }
+
+    protected function processStatement($statement)
+    {
+        $verb = $statement->data->verb->display['en-US'];
+        Log::info('Processing statement: ' . $verb);
     }
 }
