@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Statement;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,6 +15,10 @@ class SendStatementsToTopgeometri implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $dev;
+    protected $prod;
+    protected $devRoute;
+    protected $prodRoute;
     /**
      * Create a new job instance.
      *
@@ -21,7 +26,14 @@ class SendStatementsToTopgeometri implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->dev = config('trax-lrs.lrs_sync.dev');
+        if ($this->dev) {
+            $this->devRoute = config('trax-lrs.lrs_sync.dev_url') . config('trax-lrs.lrs_sync.endpoint');
+        }
+        $this->prod = config('trax-lrs.lrs_sync.prod');
+        if ($this->prod) {
+            $this->prodRoute = config('trax-lrs.lrs_sync.prod_url') . config('trax-lrs.lrs_sync.endpoint');
+        }
     }
 
     /**
@@ -40,7 +52,17 @@ class SendStatementsToTopgeometri implements ShouldQueue
 
     public function processStatement($statement)
     {
-        //TODO: Send to Topgeometri. To decide if having 1 endpoint that will process every type or having 3 endpoints, 1 for each type.
-        //TODO: At the end, if the Api return success, delete the statement from the database.
+        if ($this->dev) {
+            $response = Http::post($this->devRoute, $statement->toArray());
+        }
+        if ($this->prod) {
+            $response = Http::post($this->prodRoute, $statement->toArray());
+        }
+
+        if ($response['success']) {
+            $statement->delete();
+        }
+
+        //TODO: decide if handling noUser, noLesson and noLessonUser errors here or on topgeometri and what to do
     }
 }
