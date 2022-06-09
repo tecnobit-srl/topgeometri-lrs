@@ -43,10 +43,17 @@ class SendStatementsToTopgeometri implements ShouldQueue
      */
     public function handle()
     {
-        $statements = Statement::all();
+        $statements = Statement::orderBy('created_at', 'asc')->get()->groupBy(['eg_course_id', 'email']);
 
         foreach ($statements as $statement) {
-            $this->processStatement($statement);
+            foreach($statement as $stat) {
+                foreach ($stat as $s){
+                    $success = $this->processStatement($s);
+                    if (!$success) {
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -62,6 +69,8 @@ class SendStatementsToTopgeometri implements ShouldQueue
         if ($response['success']) {
             $statement->delete();
         }
+
+        return $response['success'];
 
         //TODO: decide if handling noUser, noLesson and noLessonUser errors here or on topgeometri and what to do
     }
