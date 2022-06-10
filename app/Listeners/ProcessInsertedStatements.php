@@ -58,17 +58,17 @@ class ProcessInsertedStatements
             $processed->email = Str::remove('mailto:', $data->actor->mbox);
             $processed->eg_course_id = $data->context->extensions->{'http://easygenerator/expapi/course/id'};
             $processed->save();
-        }
 
-        $toSend = Statement::where('email', $processed->email)
-        ->where('eg_course_id', $processed->eg_course_id)
-        ->orderBy('created_at', 'asc')
-        ->get();
+            $toSend = Statement::where('email', $processed->email)
+            ->where('eg_course_id', $processed->eg_course_id)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-        foreach ($toSend as $send) {
-            $success = $this->sendStatement($send);
-            if (!$success) {
-                break;
+            foreach ($toSend as $send) {
+                $success = $this->sendStatement($send);
+                if (!$success) {
+                    break;
+                }
             }
         }
     }
