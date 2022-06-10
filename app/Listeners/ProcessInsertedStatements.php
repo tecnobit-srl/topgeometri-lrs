@@ -82,11 +82,13 @@ class ProcessInsertedStatements
             $response = Http::post($this->prodRoute, $statement->toArray());
         }
 
+        Log::info($response);
         if ($response['success']) {
             $statement->delete();
         }
 
-        return $response['success'];
+        return false;
+        //return $response['success'];
 
         //TODO: decide if handling noUser, noLesson and noLessonUser errors here or on topgeometri and what to do
     }
