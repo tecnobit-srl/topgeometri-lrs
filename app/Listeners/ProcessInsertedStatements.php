@@ -46,7 +46,7 @@ class ProcessInsertedStatements
             $processed = new Statement();
             $processed->type = $verb;
             $processed->email = Str::remove('mailto:', $data->actor->mbox);
-            $processed->eg_course_id = $data->context->extensions->{'http://easygenerator/expapi/course/id'};
+            $processed->eg_course_id = $data->object->id;
             $processed->save();
 
             $toSend = Statement::where('email', $processed->email)
