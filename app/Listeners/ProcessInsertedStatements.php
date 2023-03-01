@@ -42,11 +42,13 @@ class ProcessInsertedStatements
         $data = $statement['data'];
         $verb = $data->verb->display->{'en-US'};
         if (in_array($verb, $this->toProcess)) {
-            Log::info('Processing statement: ' . $verb);
+            $email = Str::remove('mailto:', $data->actor->mbox);
+            $id = $data->object->id;
+            Log::info('Processing statement: ' . $verb . ' for ' . $email . ' with eg id = ' . $id);
             $processed = new Statement();
             $processed->type = $verb;
-            $processed->email = Str::remove('mailto:', $data->actor->mbox);
-            $processed->eg_course_id = $data->object->id;
+            $processed->email = $email;
+            $processed->eg_course_id = $id;
             $processed->save();
 
             $toSend = Statement::where('email', $processed->email)
