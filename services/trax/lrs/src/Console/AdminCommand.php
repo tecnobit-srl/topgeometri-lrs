@@ -4,9 +4,9 @@ namespace Trax\Lrs\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Trax\Auth\Stores\Users\UserRepository;
-use Trax\Auth\Stores\Users\User;
 use Trax\Auth\Password;
+use Trax\Auth\Stores\Users\User;
+use Trax\Auth\Stores\Users\UserRepository;
 
 class AdminCommand extends Command
 {
@@ -20,7 +20,6 @@ class AdminCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param  \Trax\Auth\Stores\Users\UserRepository  $users
      * @return void
      */
     public function __construct(UserRepository $users)
@@ -32,7 +31,6 @@ class AdminCommand extends Command
     /**
      * Get a user given its ID.
      *
-     * @param int  $id
      * @return \Trax\Auth\Stores\Users\User|false
      */
     protected function getUser(int $id)
@@ -42,15 +40,16 @@ class AdminCommand extends Command
         } catch (\Exception $e) {
             $this->error("There is no admin account with this id [$id].");
             $this->info('');
+
             return false;
         }
+
         return $user;
     }
 
     /**
      * Prompt the user password.
      *
-     * @param  bool  $required
      * @return string
      */
     protected function askUserPassword(bool $required = false)
@@ -58,7 +57,7 @@ class AdminCommand extends Command
         $default = $required ? Password::random() : '';
         while (1) {
             $password = $this->ask('Password', $default);
-            if (!$required && empty($password)) {
+            if (! $required && empty($password)) {
                 break;
             }
             if (Password::validate($password)) {
@@ -67,13 +66,13 @@ class AdminCommand extends Command
             $this->error('This password does not comply with the password security rules.');
             $this->info(Password::notice($password));
         }
+
         return $password;
     }
 
     /**
      * Prompt the user choice.
      *
-     * @param bool  $allOption
      * @return int|string|false  User ID | 'all' | false
      */
     protected function chooseUser(bool $allOption = false)
@@ -85,15 +84,16 @@ class AdminCommand extends Command
             $this->warn("There is currently no admin account defined. 
 You should define one with 'php artisan admin:create'.");
             $this->info('');
+
             return false;
         }
-        
+
         if ($allOption) {
             $users['a'] = 'All users';
         }
         $users['x'] = 'Cancel';
-    
-        $id = $this->choice("Choose an admin account", $users);
+
+        $id = $this->choice('Choose an admin account', $users);
 
         switch ($id) {
             case 'a':
@@ -107,9 +107,6 @@ You should define one with 'php artisan admin:create'.");
 
     /**
      * Display a list of users.
-     *
-     * @param \Illuminate\Support\Collection  $users
-     * @return void
      */
     protected function displayUsers(Collection $users): void
     {
@@ -124,7 +121,7 @@ You should define one with 'php artisan admin:create'.");
                 $user->email,
             ];
         });
-        
+
         if ($data->isEmpty()) {
             $this->info("There is currently no admin account defined. 
 You should define one with 'php artisan admin:create'.");
@@ -136,9 +133,6 @@ You should define one with 'php artisan admin:create'.");
 
     /**
      * Display a user.
-     *
-     * @param \Trax\Auth\Stores\Users\User  $user
-     * @return void
      */
     protected function displayUser(User $user): void
     {

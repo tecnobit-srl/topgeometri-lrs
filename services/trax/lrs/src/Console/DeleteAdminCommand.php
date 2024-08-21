@@ -25,21 +25,21 @@ class DeleteAdminCommand extends AdminCommand
      */
     public function handle()
     {
-        if (!$id = $this->argument('id')) {
-            if (!$id = $this->chooseUser()) {
+        if (! $id = $this->argument('id')) {
+            if (! $id = $this->chooseUser()) {
                 return;
             }
         }
 
-        if (!$user = $this->getUser($id)) {
+        if (! $user = $this->getUser($id)) {
             return;
         }
 
         $this->line('');
-        if (!$this->confirm('Are you sure you want to delete this account?')) {
+        if (! $this->confirm('Are you sure you want to delete this account?')) {
             return;
         }
-        
+
         try {
             $this->users->delete($id);
         } catch (\Exception $e) {
@@ -47,7 +47,7 @@ class DeleteAdminCommand extends AdminCommand
         }
 
         $this->line('Account deleted.');
-                
+
         if ($this->option('list')) {
             $users = $this->users->addFilter(['admin' => 1, 'owner_id' => null])->all();
             $this->displayUsers($users);

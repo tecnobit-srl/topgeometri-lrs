@@ -3,8 +3,8 @@
 namespace Trax\Lrs;
 
 use Illuminate\Support\ServiceProvider;
-use Trax\Lrs\BasicClients\BasicClientService;
 use Trax\Auth\Stores\Accesses\AccessService;
+use Trax\Lrs\BasicClients\BasicClientService;
 
 class LrsServiceProvider extends ServiceProvider
 {
@@ -22,8 +22,6 @@ class LrsServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -52,6 +50,7 @@ class LrsServiceProvider extends ServiceProvider
         // Basic client service.
         $this->app->singleton(BasicClientService::class, function () {
             $accesses = $this->app->make(AccessService::class);
+
             return new BasicClientService($accesses);
         });
     }

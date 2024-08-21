@@ -17,7 +17,7 @@ class ListAdminCommand extends AdminCommand
      * @var string
      */
     protected $description = 'List the existing admin accounts';
-    
+
     /**
      * Execute the console command.
      *

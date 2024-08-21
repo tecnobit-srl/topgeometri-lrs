@@ -40,7 +40,7 @@ class BasicClientController extends CrudController
     /**
      * Get the validation rules.
      *
-     * @param \Illuminate\Http\Request  $request;
+     * @param  \Illuminate\Http\Request  $request;
      * @return array
      */
     protected function validationRules(Request $request)
@@ -57,8 +57,6 @@ class BasicClientController extends CrudController
     /**
      * Hook before any request.
      *
-     * @param  \Trax\Repo\CrudRequest  $crudRequest
-     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     protected function beforeRequest(CrudRequest $crudRequest, Request $request)
@@ -69,8 +67,6 @@ class BasicClientController extends CrudController
     /**
      * Hook before a store request.
      *
-     * @param  \Trax\Repo\CrudRequest  $crudRequest
-     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     protected function beforeStore(CrudRequest $crudRequest, Request $request)
@@ -90,6 +86,7 @@ class BasicClientController extends CrudController
         $model->access = $model->accesses->first();
         $model->access->credentials->setVisible(['password', 'username']);
         $model->access->setVisible(['id', 'uuid', 'credentials']);
+
         return $model->setVisible(['id', 'name', 'access']);
     }
 }

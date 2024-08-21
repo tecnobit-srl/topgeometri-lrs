@@ -17,7 +17,7 @@ class UpdateAdminCommand extends AdminCommand
      * @var string
      */
     protected $description = 'Update an existing admin account';
-    
+
     /**
      * Execute the console command.
      *
@@ -25,13 +25,13 @@ class UpdateAdminCommand extends AdminCommand
      */
     public function handle()
     {
-        if (!$id = $this->argument('id')) {
-            if (!$id = $this->chooseUser()) {
+        if (! $id = $this->argument('id')) {
+            if (! $id = $this->chooseUser()) {
                 return;
             }
         }
 
-        if (!$user = $this->getUser($id)) {
+        if (! $user = $this->getUser($id)) {
             return;
         }
 
@@ -53,7 +53,7 @@ class UpdateAdminCommand extends AdminCommand
         }
 
         $this->line('admin account updated.');
-        
+
         if ($this->option('list')) {
             $users = $this->users->addFilter(['admin' => 1, 'owner_id' => null])->all();
             $this->displayUsers($users);

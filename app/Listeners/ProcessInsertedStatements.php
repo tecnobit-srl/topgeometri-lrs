@@ -2,15 +2,17 @@
 
 namespace App\Listeners;
 
-use App\Jobs\SendStatementToApi;
+use App\Actions\SendStatementToApiAction;
+use App\Jobs\SendMissedStatementsToApi;
 use App\Models\Statement;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Trax\XapiStore\Events\StatementRecordsInserted;
 
 class ProcessInsertedStatements
 {
     protected $toProcess = ['passed', 'failed', 'started'];
+
     /**
      * Create the event listener.
      *
@@ -18,13 +20,11 @@ class ProcessInsertedStatements
      */
     public function __construct()
     {
-
     }
 
     /**
      * Handle the event.
      *
-     * @param  \Trax\XapiStore\Events\StatementRecordsInserted  $event
      * @return void
      */
     public function handle(StatementRecordsInserted $event)
@@ -41,21 +41,26 @@ class ProcessInsertedStatements
         if (in_array($verb, $this->toProcess)) {
             $email = Str::remove('mailto:', $data->actor->mbox);
 
-            if(empty($email)) {
+            if (empty($email)) {
                 return;
             }
 
+            SendMissedStatementsToApi::dispatch();
+
             $id = $data->object->id;
 
-            Log::info('Processing statement: ' . $verb . ' for ' . $email . ' with eg id = ' . $id);
+            Log::info('Processing statement: '.$verb.' for '.$email.' with eg id = '.$id);
 
             $processed = new Statement();
             $processed->type = $verb;
             $processed->email = $email;
             $processed->eg_course_id = $id;
-            $processed->save();
 
-            SendStatementToApi::dispatch($processed);
+            $success = (new SendStatementToApiAction)->execute($processed);
+
+            if (! $success) {
+                $processed->save();
+            }
         }
     }
 }

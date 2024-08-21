@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         StatementRecordsInserted::class => [
             ProcessInsertedStatements::class,
-        ]
+        ],
     ];
 
     /**

@@ -3,8 +3,8 @@
 namespace Trax\Lrs\BasicClients;
 
 use Illuminate\Support\Facades\DB;
-use Trax\Auth\Stores\Clients\ClientRepository;
 use Trax\Auth\Stores\Accesses\AccessService;
+use Trax\Auth\Stores\Clients\ClientRepository;
 
 class BasicClientService extends ClientRepository
 {
@@ -15,11 +15,9 @@ class BasicClientService extends ClientRepository
      */
     protected $accesses;
 
-
     /**
      * Create the constructor.
      *
-     * @param  \Trax\Auth\Stores\Accesses\AccessService  $accesses
      * @return void
      */
     public function __construct(AccessService $accesses)
@@ -31,13 +29,11 @@ class BasicClientService extends ClientRepository
     /**
      * Create a new resource.
      *
-     * @param array  $data
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function create(array $data)
     {
         return DB::transaction(function () use ($data) {
-
             $client = parent::create($data);
 
             $data = $data['access'];
@@ -54,14 +50,13 @@ class BasicClientService extends ClientRepository
     /**
      * Update an existing resource, given its model and new data.
      *
-     * @param \Illuminate\Database\Eloquent\Model  $model
-     * @param array  $data
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  array  $data
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function updateModel($model, array $data = null)
     {
         return DB::transaction(function () use ($model, $data) {
-
             $client = parent::updateModel($model, $data);
 
             $data = $data['access'];

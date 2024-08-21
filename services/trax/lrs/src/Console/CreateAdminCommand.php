@@ -34,7 +34,7 @@ class CreateAdminCommand extends AdminCommand
             'password' => $this->askUserPassword(true),
             'admin' => true,
         ];
-    
+
         try {
             $user = $this->users->create($data);
         } catch (\Exception $e) {

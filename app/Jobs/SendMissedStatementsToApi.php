@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Actions\SendStatementToApiAction;
 use App\Models\Statement;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SendStatementToApi implements ShouldQueue
+class SendMissedStatementsToApi implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,10 +30,8 @@ class SendStatementToApi implements ShouldQueue
      */
     public function handle()
     {
-        $success = (new SendStatementToApiAction())->execute($this->statement);
-
-        if ($success) {
-            $this->statement->delete();
+        foreach (Statement::get() as $statement) {
+            SendStatementToApi::dispatch($statement);
         }
     }
 }

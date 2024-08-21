@@ -5,7 +5,6 @@ namespace App\Observers;
 use Illuminate\Support\Facades\Log;
 use Trax\XapiStore\Stores\Statements\Statement;
 
-
 class StatementObserver
 {
     /**
