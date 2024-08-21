@@ -19,7 +19,7 @@ class SendMissedStatementsToApi implements ShouldQueue, ShouldBeUnique
      *
      * @return void
      */
-    public function __construct(public Statement $statement)
+    public function __construct()
     {
     }
 
