@@ -40,6 +40,11 @@ class ProcessInsertedStatements
         $verb = $data->verb->display->{'en-US'};
         if (in_array($verb, $this->toProcess)) {
             $email = Str::remove('mailto:', $data->actor->mbox);
+
+            if(empty($email)) {
+                return;
+            }
+
             $id = $data->object->id;
 
             Log::info('Processing statement: ' . $verb . ' for ' . $email . ' with eg id = ' . $id);
