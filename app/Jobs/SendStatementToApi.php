@@ -4,15 +4,13 @@ namespace App\Jobs;
 
 use App\Models\Statement;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Actions\SendStatementsToApiAction;
+use App\Actions\SendStatementToApiAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class SendStatementsToTopgeometri implements ShouldQueue
+class SendStatementToApi implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,9 +19,9 @@ class SendStatementsToTopgeometri implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Statement $statement)
     {
-        
+
     }
 
     /**
@@ -33,12 +31,6 @@ class SendStatementsToTopgeometri implements ShouldQueue
      */
     public function handle()
     {
-        $statements = Statement::orderBy('created_at', 'asc')->get()->groupBy(['eg_course_id', 'email']);
-
-        foreach ($statements as $statement) {
-            foreach($statement as $stat) {
-                (new SendStatementsToApiAction())->execute($stat);
-            }
-        }
+        (new SendStatementToApiAction())->execute($this->statement);
     }
 }
