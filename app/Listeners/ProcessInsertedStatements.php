@@ -11,7 +11,7 @@ use Trax\XapiStore\Events\StatementRecordsInserted;
 
 class ProcessInsertedStatements
 {
-    protected $toProcess = ['passed', 'failed', 'started'];
+    protected $toProcess = ['passed', 'failed']; //, 'started'
 
     /**
      * Create the event listener.
