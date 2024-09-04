@@ -47,7 +47,7 @@ class ProcessInsertedStatements
 
             SendMissedStatementsToApi::dispatch();
 
-            $id = $data->object->id;
+            $id =  Str::finish($data->object->id,'/');
 
             Log::info('Processing statement: '.$verb.' for '.$email.' with eg id = '.$id);
 
