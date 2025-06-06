@@ -37,7 +37,7 @@ class ProcessInsertedStatements
     protected function processStatement($statement)
     {
         $data = $statement['data'];
-        $verb = $data->verb->display->{'en-US'};
+        $verb = $data->verb->display->{'en-US'} ?? $data->verb->display->{'it-IT'};
         if (in_array($verb, $this->toProcess)) {
             $email = Str::remove('mailto:', $data->actor->mbox);
 

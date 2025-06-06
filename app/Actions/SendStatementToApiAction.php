@@ -37,7 +37,7 @@ class SendStatementToApiAction
             $response = Http::post($this->devRoute, $statement->toArray());
         }
         if ($this->prod) {
-            $response = Http::post($this->prodRoute, $statement->toArray());
+            $response = Http::withOptions(['verify' => false])->post($this->prodRoute, $statement->toArray());
         }
 
         return $response['success'] ?? false;
